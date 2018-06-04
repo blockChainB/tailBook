@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TailBook</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"> -->
+    <link rel="stylesheet" href="./stylesheets/app.css">
+  </head>
+  <body>
+      <div class="noExtension hide" id="noExtension">
+          <div class="card">
+            <div class="card-body mt-3 "> <h1>FBI　WARNING </h1><br>
+              Please use Chrome and install <u><a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a></u>  to use Tailbook!<br><br>
+             <div>注意：请使用谷歌浏览器、并安装钱包插件 <u><a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a></u> 来玩 尾书！<br><br></div>
+            </div>
+          </div>
+       </div>
+      
+
+    <div class="page-group mainPage">
+        <div class="page page-current">
+            
+            
+            <div class="content-padded content-regis">
+                <header class="bar bar-nav">
+                    <a href="#" class="icon  pull-left" onclick="App.openProfilePop()"><img class="avatar" id="my-avatar" src="./image/default.png" width="34" height="34"> </a>
+                    <a class="icon icon-edit pull-right" onclick="App.openPostPop()"></a>
+                    <h1 class="title">Tailbook</h1>
+                  </header>
+                  
+                  <div class="content">
+                      <div class="all-status">
+                          <!-- <div class="content-status">
+                            <div class="card facebook-card">
+                                <div class="card-header no-border"><a class="button pull-right" >关注</a>
+                                  <div class="facebook-avatar"><img src="" width="34" height="34"></div>
+                                  <div class="facebook-name">Isuue</div>
+                                  <div class="facebook-date">星期一 3:47pm</div>
+                                  
+                                </div>
+                                <div class="card-content">
+                                  <div class="content-block">
+                                    <p>nishshh</p>
+                                  </div>
+                                  <img src="./image/11.jpg" width="100%"></div>
+                                <div class="card-footer no-border">
+                                    <a href="#" class="link ">赞</a>
+                                  <a href="#" class="link">#22</a>
+                                </div>
+                              </div>
+                          </div> -->
+                        </div>
+                          <div class="status-bottom text-center mt-3">
+                              <!-- <button class="button more-btn" onclick="App.getStatuses()">加载更多</button> -->
+                        </div>
+                      
+                      
+                      </div>
+                    
+                    
+                  
+                  
+            </div>
+            
+        </div>
+    </div>
+
+
+
+      <div class="popup popup-login">
+          <header class="bar bar-nav">
+              <h1 class="title">登录</h1>
+              <a href="#" class="icon  pull-right" onclick="App.closePopup()">关闭 </a>
+          </header>
+          <div class="content content-login">
+              <div class="content-block text-center">
+                  <h1 class="theme">Tailbook</h1>
+                  <h3>加入尾书</h3>
+                <p>步骤：打开 NAS nano，点击【我要收币】，点击【复制地址】，然后填入下方输入框内即可，为保证用户体验，请使用手机操作</p>
+                
+                <input type="text" id='wallet-address' class="my-input" placeholder='输入钱包地址...'/> 
+
+                 <p> <a href="#" class="button button-big button-fill" onclick="App.login()">登录 </a></p>
+                
+              </div>
+            </div>
+      </div>
+    
+      <div class="popup popup-regis">
+          <header class="bar bar-nav">
+              <h1 class="title">注册</h1>
+              <a href="#" class="icon  pull-right" onclick="App.closePopup()">关闭 </a>
+          </header>
+          <div class="content">
+            <div class="content-block text-center">
+                
+              <img src="./image/default.png"  class="avatar" id="reg-avatar" width="100" height="100">
+
+              <div class="list-block">
+
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-name"></i></div>
+                        <div class="item-inner">
+                          <div class="item-title label">昵称</div>
+                          <div class="item-input ">
+                            <input type="text" class="text-center" id="reg-name" placeholder="10字符以内">
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <label for="avatar-input" class="button button-big">选择头像</label>
+                <input  id="avatar-input" class="hide"  type="file" onchange="App.upload(this,'reg-avatar')" /> 
+                <p> <a href="#" class="button button-big button-fill" onclick="App.register()">注册 </a></p>
+            </div>
+          </div>
+      </div>
+      <div class="popup popup-post">
+          <header class="bar bar-nav">
+              <h1 class="title">发布新状态</h1>
+              <a href="#" class="icon  pull-right" onclick="App.closePopup()">关闭 </a>
+          </header>
+          <div class="content">
+            <div class="content-block text-center">
+              
+               <textarea id="post-text" class="my-input my-textarea" rows="10" placeholder="随时随地，分享你的新鲜事..."></textarea>
+               <img src="none"  id="post-image" width="200">
+                <label for="post-img" class="button button-big mt-3">上传图片</label>
+                <input  id="post-img" class="hide"  type="file" onchange="App.upload(this,'post-image')" /> 
+                <p> <a href="#" class="button button-big button-fill" onclick="App.postStatus()">发布 </a></p>
+            </div>
+          </div>
+      </div>
+      <div class="popup popup-jump">
+          <!-- <header class="bar bar-nav">
+              <h1 class="title">发布新状态</h1>
+              <a href="#" class="icon  pull-right" onclick="App.closePopup()">关闭 </a>
+          </header> -->
+          <div class="content">
+            <img src="none" width="100%" id="jump-device">
+          </div>
+      </div>
+
+      <div class="popup popup-profile">
+          <header class="bar bar-nav">
+              <h1 class="title">个人</h1>
+              <a href="#" class="icon  pull-right" onclick="App.closePopup()">关闭 </a>
+          </header>
+          <div class="content">
+            <div class="content-block text-center">
+                
+              <img src="./image/default.png"  class="avatar" id="prof-avatar" width="100" height="100">
+
+              <div class="list-block">
+                  <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                              <div class="item-title label">昵称</div>
+                              <div class="item-title label" id="prof-name">haha</div>
+                              
+                          </div>
+                    </li>
+                  </ul>
+                  <ul>
+                      <li>
+                          <div class="item-content">
+                              <div class="item-media"><i class="icon icon-form-name"></i></div>
+                              <div class="item-inner">
+                                <div class="item-title label">粉丝</div>
+                                <div class="item-title label" id="prof-fans">119</div>
+                                
+                            </div>
+                      </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                <div class="item-inner">
+                                  <div class="item-title label">被赞</div>
+                                  <div class="item-title label" id="prof-like">119</div>
+                                  
+                              </div>
+                        </li>
+                      </ul>
+                      
+                </div>
+      
+            </div>
+          </div>
+      </div>
+
+    <!-- <script src="./javascripts/jquery-3.3.1.min.js"></script> -->
+    <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <!-- <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script> -->
+    <script src="./javascripts/nebulas.min.js"></script>
+  <script src="./javascripts/nebPay.js"></script>
+  <script src="./javascripts/app.js"></script>
+  </body>
+</html>
