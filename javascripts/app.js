@@ -32,6 +32,7 @@ var isMobile;
 var dappAddress=chainInfo.contractAddress;
 var wait,transSerial,transTimer;
 var lastID;
+var wait;
 let GET_LIMIT=5;
 
 window.App = {
@@ -60,13 +61,20 @@ window.App = {
 
 transReceipt:function(cb){
   var self=this;
-  $.showPreloader('交易确认中...')
+  if(wait>10){
+    $.hidePreloader();
+    $.toast('超时，请自行刷新查看！');
+    return ;
+  }
+  $.showPreloader('交易确认中...'+wait)
+  
   this.get("transReceipt","[\""+transSerial+"\"]",function(result){
     if(result){
       console.log('result='+JSON.stringify(result))
       $.hidePreloader();
       if(cb)cb(result);
     }else{
+      wait++;
       setTimeout(() => {
         self.transReceipt(cb);
       }, 5000);
@@ -93,22 +101,6 @@ login:function(){
   })
   
 },
-
-tsave:function(){
-  var self=this;
-  transSerial=this.getRandCode(5)
-  var val=$('#wallet-address').val().trim();
-  var callArgs= "[\""+transSerial+"\",\""+val+"\"]";
-  nebPay.call(dappAddress, "0", "save", callArgs,{    
-    listener: self.tsaveCB
-  });
-  
-  if(isMobile) this.transReceipt()
-},
-tsaveCB:function(cb){
-  if(cb.txhash) App.transReceipt()
-},
-
 
 
 
@@ -162,6 +154,7 @@ registerCB:function(cb){
 },
 getRegister:function(){
   var self=this;
+  wait=0;
   this.transReceipt(function(result){
     if(result){
       account=result;
@@ -267,6 +260,7 @@ getBaseData:function(){
   },
   getPostStatus:function(){
     var self=this;
+    wait=0;
     this.transReceipt(function(result){
       if(result){
         self.closePopup();
@@ -292,6 +286,7 @@ getBaseData:function(){
   },
   getLikeStatus:function(){
     var self=this;
+    wait=0;
     this.transReceipt(function(result){
       if(result){
         self.getBaseData();
@@ -323,6 +318,7 @@ getBaseData:function(){
   },
   getFollow:function(){
     var self=this;
+    wait=0;
     this.transReceipt(function(result){
       if(result){
         self.getBaseData();
